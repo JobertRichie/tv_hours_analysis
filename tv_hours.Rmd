@@ -1,0 +1,31 @@
+---
+date: "2024-07-18"
+author: "Joert Richie Nansseu"
+output: html_document
+title: "TV hours analysis"
+---
+
+```{r}
+# Package to be installed
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(tidyverse, here)
+
+#data importation into the environment
+gss_cat <- gss_cat
+
+```
+
+```{r}
+#Comparison of hours of TV watched
+tv_hrs_table <- gss_cat %>% 
+  group_by(marital) %>% 
+  summarise(mean_tv_hrs = mean(tvhours, na.rm = T),
+            median_tv_hrs = median(tvhours, na.rm = T),
+            min_tv_hrs = min(tvhours, na.rm = T),
+            max_tv_hrs = max(tvhours, na.rm = T))
+
+#saving the table
+write_csv(x = tv_hrs_table,
+          file = here("Tv_hours_by_mstatus.csv"))
+```
+
