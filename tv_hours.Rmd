@@ -18,7 +18,7 @@ gss_cat <- gss_cat
 ```{r}
 #Comparison of hours of TV watched
 tv_hrs_table <- gss_cat %>% 
-  filter(age > 30) %>% 
+  filter(age > 30, race == "White") %>% 
   group_by(marital) %>% 
   summarise(mean_tv_hrs = mean(tvhours, na.rm = T),
             median_tv_hrs = median(tvhours, na.rm = T),
